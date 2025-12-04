@@ -1,11 +1,15 @@
 from app.mcp.server import mcp
 from notion_client import Client
-import os
+
+from app.config import Config
+
+config = Config()
 
 # Tool 1: 템플릿 읽기
 @mcp.tool()
 def get_portfolio_template(template_page_id: str) -> dict:
     """Notion 포트폴리오 템플릿 구조를 읽습니다"""
+    notion = Client(auth=config.NOTION_TOKEN)
     # 구현...
 
 # Tool 2: 초안 생성
