@@ -1,17 +1,24 @@
 from app.mcp.server import mcp
 from github import Github
 import os
-from config import Config
+from app.config import Config
 import base64
 
 # 토큰 인증
 config = Config()
-g = Github(config.GITHUB_TOKEN)
+
+def _get_github_client() -> Github:
+    """GitHub 클라이언트를 안전하게 가져옵니다"""
+    token = config.GITHUB_TOKEN
+    if not token:
+        raise ValueError("GITHUB_TOKEN이 설정되지 않았습니다")
+    return Github(token)
 
 # Tool 1: 레포 목록
 @mcp.tool()
 def list_repositories() -> list:
     """사용자의 GitHub 레포지토리 목록을 가져옵니다"""
+    g = _get_github_client()
     return [repo.name for repo in g.get_user().get_repos()]
 
 # Tool 2: 레포 상세 정보
@@ -25,6 +32,7 @@ def get_repository_info(repo_name: str) -> dict:
     Returns:
         레포 정보 딕셔너리
     """
+    g = _get_github_client()
     repo_dict = g.get_repo(repo_name)
     return {
         "name": repo_dict.name,
@@ -47,6 +55,7 @@ def get_readme_content(repo_name: str) -> str:
     Returns:
         README Markdown 텍스트
     """
+    g = _get_github_client()
     # GitHub Repository README 가져오기
     try:
         repository = g.get_repo(repo_name)
