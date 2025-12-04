@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+anthropic
+mcp
+PyGithub
+notion-client
+python-dotenv
+pydantic
