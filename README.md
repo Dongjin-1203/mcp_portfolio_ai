@@ -122,3 +122,30 @@ portfolio-ai/
 ├── .gitignore
 └── README.md
 ```
+
+---
+
+## 프로젝트 실행 방법
+
+### 사전 준비
+
+- Python 3.12.3
+
+#### MCP Server
+
+1. **uv 설치**
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+2. **Python 가상환경 생성 및 활성화**
+```powershell
+# 가상환경 생성
+python -m venv venv
+
+# 가상환경 실행
+venv\Scripts\activate
+
+# 의존성 설치
+pip install -r requirements.txt
+```
