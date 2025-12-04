@@ -157,3 +157,9 @@ venv\Scripts\activate
 # 의존성 설치
 pip install -r requirements.txt
 ```
+
+**MCP 테스트 방법**
+```powershell
+# powershell 입력
+python test_mcp.py
+```

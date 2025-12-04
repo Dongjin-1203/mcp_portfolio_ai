@@ -7,6 +7,9 @@ from app.config import Config
 # 토큰 인증
 config = Config()
 
+# 로거 설정
+logger = logging.getLogger(__name__)
+
 def _get_github_client() -> Github:
     """GitHub 클라이언트를 안전하게 가져옵니다"""
     token = config.GITHUB_TOKEN
@@ -31,7 +34,6 @@ def list_repositories() -> list:
             })
         return repos
     except Exception as e:
-        logger = logging.getLogger(__name__)
         logger.error(f"레포 목록 조회 실패: {e}")
         return []
 
@@ -59,7 +61,6 @@ def get_repository_info(repo_name: str) -> dict:
             "language": repo_dict.language,
         }
     except Exception as e:
-        logger = logging.getLogger(__name__)
         logger.error(f"레포 정보 조회 실패: {e}")
         return {
             "error": str(e),
@@ -90,6 +91,5 @@ def get_readme_content(repo_name: str) -> str:
 
         
     except Exception as e:
-        logger = logging.getLogger(__name__)
         logger.error(f"README 가져오기 실패: {e}")
         return None
