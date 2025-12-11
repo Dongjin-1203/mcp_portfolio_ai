@@ -104,7 +104,7 @@ def find_portfolio_page_by_title(title: str) -> dict:
     """부모 페이지의 자식 페이지에서 제목으로 찾습니다"""
     try:
         notion = _get_notion_client()
-        parent_page_id = os.getenv("NOTION_PORTFOLIO_PAGE_ID")
+        parent_page_id = config.NOTION_PORTFOLIO_PAGE_ID
         
         # 부모 페이지의 자식 블록 가져오기
         children = notion.blocks.children.list(block_id=parent_page_id)
@@ -136,14 +136,7 @@ def find_portfolio_page_by_title(title: str) -> dict:
 
 @mcp.tool()
 def delete_portfolio_page_by_id(page_id: str) -> str:
-    """페이지 ID로 포트폴리오 페이지를 삭제합니다
-    
-    Args:
-        page_id: 삭제할 페이지 ID
-        
-    Returns:
-        삭제 결과 메시지
-    """
+    """페이지 ID로 포트폴리오 페이지를 삭제합니다"""
     try:
         notion = _get_notion_client()
         
@@ -162,14 +155,7 @@ def delete_portfolio_page_by_id(page_id: str) -> str:
     
 @mcp.tool()
 def delete_portfolio_page(title: str) -> str:
-    """제목으로 포트폴리오 페이지를 찾아 삭제합니다
-    
-    Args:
-        title: 삭제할 페이지 제목
-        
-    Returns:
-        삭제 결과 메시지
-    """
+    """제목으로 포트폴리오 페이지를 찾아 삭제합니다"""
     try:
         # 1단계: 제목으로 페이지 찾기
         page_info = find_portfolio_page_by_title(title)

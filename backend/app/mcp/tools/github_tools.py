@@ -40,14 +40,7 @@ def list_repositories() -> list:
 # Tool 2: 레포 상세 정보
 @mcp.tool()
 def get_repository_info(repo_name: str) -> dict:
-    """특정 레포지토리의 상세 정보를 가져옵니다
-    
-    Args:
-        repo_name: 레포지토리 이름 (예: "username/repo")
-    
-    Returns:
-        레포 정보 딕셔너리
-    """
+    """특정 레포지토리의 상세 정보를 가져옵니다"""
     try:
         g = _get_github_client()
         repo_dict = g.get_repo(repo_name)
@@ -70,14 +63,7 @@ def get_repository_info(repo_name: str) -> dict:
 # Tool 3: README 가져오기
 @mcp.tool()
 def get_readme_content(repo_name: str) -> str:
-    """README.md 내용을 가져옵니다
-    
-    Args:
-        repo_name: 레포지토리 이름
-        
-    Returns:
-        README Markdown 텍스트
-    """
+    """README.md 내용을 가져옵니다"""
     g = _get_github_client()
     # GitHub Repository README 가져오기
     try:
